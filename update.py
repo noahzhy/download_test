@@ -8,16 +8,13 @@ config_file = 'config.ini'
 
 def get_newest_version():
     local_version, domain, update_file = load_config(config_file)
-
     try:
         url = 'http://{}/{}'.format(domain, update_file)
         sess = requests.Session()
         r = sess.post(url=url)
-
         if r.status_code == 200:
             j = r.json()
             return j['version']
-
     except Exception as e:
         print(e)
         return local_version
@@ -36,7 +33,6 @@ def get_file_list():
     _, domain, file_list = load_config(config_file)
     url = 'http://{}/{}'.format(domain, file_list)
     file_list = []
-
     try:
         sess = requests.Session()
         r = sess.post(url=url)
@@ -44,7 +40,6 @@ def get_file_list():
             j = r.json()
             if len(j['file_list']) > 0:
                 file_list = j['file_list']
-
     except Exception as e:
         print(e)
 
