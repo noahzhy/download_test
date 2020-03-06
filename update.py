@@ -11,7 +11,6 @@ local_version = config['update_config']['version']
 domain = config['update_config']['domain']
 update_file = config['update_config']['update_file']
 
-
 class Update():
     def __init__(self):
         version = local_version
@@ -19,7 +18,7 @@ class Update():
         try:
             url = 'http://{}/{}'.format(domain, update_file)
             sess = requests.Session()
-            r = sess.post(url=url)
+            r = sess.post(url=url, timeout=5)
             if r.status_code == 200:
                 j = r.json()
                 version = j['version']
