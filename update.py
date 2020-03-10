@@ -18,7 +18,7 @@ class Update():
         try:
             url = 'http://{}/{}'.format(domain, update_file)
             sess = requests.Session()
-            r = sess.post(url=url, timeout=5)
+            r = sess.post(url=url, timeout=10)
             if r.status_code == 200:
                 j = r.json()
                 version = j['version']
